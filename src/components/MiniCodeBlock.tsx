@@ -1,4 +1,3 @@
-import React from 'react'
 import { CodeBlock } from '../types'
 import { Link } from 'react-router-dom'
 const MiniCodeBlock = ({
@@ -10,8 +9,8 @@ const MiniCodeBlock = ({
 }) => {
   return (
     <Link to={`/${codeBlock._id}`}>
-      <div className="mini-codeblock flex column align-center">
-        <span className="small-title">case #{++idx}</span>
+      <div className="mini-codeblock flex align-center justify-center gap-10">
+        <span className="small-title text-center">case #{++idx}</span>
         <h1 className="title">{codeBlock.title}</h1>
       </div>
     </Link>

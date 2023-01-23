@@ -1,7 +1,6 @@
 .mini-codeblock {
     padding: 2rem;
     font-size: 1.3rem;
-    outline: 2px solid rgba(128, 128, 128, 0.63);
     border-radius: 5px;
     background: $color2;
     color: whitesmoke;
@@ -9,12 +8,11 @@
     cursor: pointer;
     align-items: center;
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
-    text-align: center;
     width: 100%;
 
     @media(max-width: 500px) {
       clip-path: polygon(5% 0, 95% 0, 95% 100%, 5% 100%);
-
+      font-size: 1rem;
     }
     .title {
       text-transform: capitalize;
@@ -25,20 +23,13 @@
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 
     }
-
-    &.mentor-inside {
-      background-color: red;
-    }
-
     .small-title {
-      background-color: $color1;
-      outline: 2px solid rgba(128, 128, 128, 0.199);
+      outline: 2px solid $color3;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 50px;
       width: 50px;
-      color: white;
     }
 
 }
@@ -47,10 +38,12 @@
   padding-block: 10px;
 }
 
-.codeblock-title {
-  text-transform: capitalize;
+.editor-wrapper {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
-
 
 .back-to-lobby {
   width: fit-content;
@@ -64,6 +57,7 @@
 }
 
 .editor-header {
+  padding-block: 1rem;
   @media(max-width: 400px) {
     flex-direction: column;
   }

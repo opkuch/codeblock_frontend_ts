@@ -20,6 +20,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Navbar />
     <RouterProvider router={router} />
-    <div className='gradient-1'/>
   </React.StrictMode>
 )
