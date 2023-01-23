@@ -18,6 +18,7 @@ import axios from 'axios'
 import { CodeBlock } from '../types'
 import CompletedBlock from '../components/CompletedBlock'
 import BackToLobby from '../components/BackToLobby'
+import Loader from '../components/Loader'
 
 const CodeBlockPage = () => {
   const { blockId } = useParams()
@@ -98,6 +99,8 @@ const CodeBlockPage = () => {
     socketService.emit(SOCKET_EMIT_UPDATE_BLOCK, response.data)
   }
 
+  if (!codeBlock) return <Loader />
+  
   return (
     <div className="main-layout">
       <BackToLobby />
