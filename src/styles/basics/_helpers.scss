@@ -165,7 +165,6 @@
 .small-title {
   color: #9e9e9e;
   font-size: 0.8571428571rem;
-  font-weight: 600;
   letter-spacing: 0.04em;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -222,4 +221,29 @@
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.codeblock-logo {
+  width: 100px;
+  height: 100px;
+  background-color: $color1;
+  outline: 6px solid $color1;
+  outline-offset: -1px;
+  transform: rotate(45deg) scale(0.5);
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: $color1;
+  }
+
+}
+
+.pos-relative {
+  position: relative;
+}
+.pos-absolute {
+  position: absolute;
 }

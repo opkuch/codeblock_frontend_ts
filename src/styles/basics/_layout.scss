@@ -1,25 +1,16 @@
 
 .main-layout {
-    padding-inline: 4rem;
+    padding-inline: 2rem;
 }
 
 
 // GRIDS
 .simple-cards-grid {
-
-    @media(max-width: 650px) {
-        display: flex;
-        flex-direction: column;
-    }
-
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     column-gap: 25px;
     row-gap: 25px;
 
-    @media (max-width: 1750px) {
-        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    }
 }
 
 // Positioning
@@ -55,4 +46,11 @@
 
   .svg-medium {
     max-width: 60px;
+  }
+
+  .gap-5 {
+    gap: 5px;
+  }
+  .gap-10 {
+    gap: 10px;
   }

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Lato&family=Lexend+Deca:wght@300&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@700&family=Roboto&family=Satisfy&family=Staatliches&family=Sue+Ellen+Francisco&family=Thasadith:wght@700&family=Varela+Round&display=swap&family=Actor&display=swap&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 // Basics
+@import 'basics/variables';
 @import 'basics/typography';
 @import 'basics/base';
 @import 'basics/helpers';
@@ -10,4 +11,10 @@
 
 // Cmps
 @import 'cmps/codeblocks';
+@import 'cmps/loader';
+@import 'cmps/navbar';
 
+.gradient-1 {
+    background: linear-gradient(to top, transparent, rgb(224, 211, 255));
+
+}

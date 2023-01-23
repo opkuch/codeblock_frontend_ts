@@ -1,0 +1,25 @@
+nav {
+  position: relative;
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    margin-bottom: 5px;
+  .codeblock-logo {
+    transition: all 0.2s ease;
+    &:hover ~ h1 {
+      color: white;
+      bottom: 50px;
+    }
+
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
+
+  h1 {
+    position: absolute;
+    bottom: 7px;
+    font-size: 1.2rem;
+    pointer-events: none;
+    transition: all 0.2s ease;
+  }
+}

@@ -1,19 +1,75 @@
 .mini-codeblock {
     padding: 2rem;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     outline: 2px solid rgba(128, 128, 128, 0.63);
-    border-radius: 25px;
-    background-color: white;
+    border-radius: 5px;
+    background: $color2;
+    color: whitesmoke;
+    clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%);
     cursor: pointer;
     align-items: center;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
-  user-select: none;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 100%;
+
+    @media(max-width: 500px) {
+      clip-path: polygon(5% 0, 95% 0, 95% 100%, 5% 100%);
+
+    }
     .title {
       text-transform: capitalize;
     }
     transition: all .2s ease;
     &:hover {
-      transform: translateY(-5px);
-      outline: 2px solid rgb(46, 3, 146);
+      outline: 2px solid $color2;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
     }
+
+    &.mentor-inside {
+      background-color: red;
+    }
+
+    .small-title {
+      background-color: $color1;
+      outline: 2px solid rgba(128, 128, 128, 0.199);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      width: 50px;
+      color: white;
+    }
+
+}
+
+.codeblock-editor {
+  padding-block: 10px;
+}
+
+.codeblock-title {
+  text-transform: capitalize;
+}
+
+
+.back-to-lobby {
+  width: fit-content;
+  position: absolute;
+  span {
+    width: 200px;
+  }
+  @media(max-width: 650px) {
+    position: static;
+  }
+}
+
+.editor-header {
+  @media(max-width: 400px) {
+    flex-direction: column;
+  }
+}
+
+.completed-codeblock {
+  background-color: lightgreen;
+  border-radius: 2px;
 }

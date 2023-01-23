@@ -10,7 +10,7 @@ const MiniCodeBlock = ({
 }) => {
   return (
     <Link to={`/${codeBlock._id}`}>
-      <div className="mini-codeblock flex column">
+      <div className="mini-codeblock flex column align-center">
         <span className="small-title">case #{++idx}</span>
         <h1 className="title">{codeBlock.title}</h1>
       </div>

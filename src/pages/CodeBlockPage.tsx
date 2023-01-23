@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { BASE_URL, debounce } from '../utils'
-import { useParams } from 'react-router-dom'
+import { BASE_URL } from '../utils'
+import { Link, useParams } from 'react-router-dom'
 import {
   socketService,
   SOCKET_EMIT_SET_TOPIC,
   SOCKET_EMIT_UPDATE_BLOCK,
-  SOCKET_EVENT_BLOCK_UPDATED
+  SOCKET_EVENT_BLOCK_UPDATED,
 } from '../services/socket-service'
 import { utilService } from '../services/util-service'
 import AceEditor from 'react-ace'
@@ -15,18 +15,26 @@ import 'ace-builds/src-noconflict/ext-language_tools'
 import 'ace-builds/src-noconflict/mode-javascript'
 import axios from 'axios'
 import { CodeBlock } from '../types'
+import smileyIcon from '../assets/smiley.svg'
+import backArrowIcon from '../assets/arrow-back.svg'
 
 const CodeBlockPage = () => {
   const { blockId } = useParams()
   const mentorRef = useRef<any>()
   const [codeBlock, setCodeBlock] = useState<CodeBlock>()
   const [editedCode, setEditedCode] = useState<any>('')
-  const delayedQuery = utilService.debounce((val: string) => handleChange(val), 1000)
+  const [isCompleted, setIsCompleted] = useState(false)
+  const delayedQuery = utilService.debounce(
+    (val: string) => handleChange(val),
+    1000
+  )
+
   useEffect(() => {
     async function fetchCodeBlock() {
-      const {data} = await axios.get(`${BASE_URL}/blocks/${blockId}`)
+      const { data } = await axios.get(`${BASE_URL}/blocks/${blockId}`)
       setCodeBlock(data)
       setEditedCode(data.code)
+      checkIfCompleted(data.code, data.solution)
     }
     fetchCodeBlock()
   }, [])
@@ -50,7 +58,23 @@ const CodeBlockPage = () => {
   function updateBlockFromSocket(block: CodeBlock) {
     setCodeBlock(block)
     setEditedCode(block.code)
+    checkIfCompleted(block.code, block.solution)
   }
+
+  function checkIfCompleted(updatedCode: string, solution: string) {
+    console.log(
+      updatedCode.toLowerCase().replace(/\s/g, ''))
+    
+    // Removing whitespaces and semicolons from code and solution to be more precise and checking the equality of the 2 strings
+    if (
+      updatedCode.toLowerCase().replace(/\s/g, '') ===
+      solution.toLowerCase().replace(/\s/g, '')
+    )
+      setIsCompleted(true)
+    // If still wrong, change the state to false
+    else setIsCompleted(false)
+  }
+
   const handleChange = async (val: string) => {
     if (mentorRef.current) return
     const newCodeBlock = JSON.parse(JSON.stringify(codeBlock))
@@ -58,14 +82,30 @@ const CodeBlockPage = () => {
     const response = await axios.put(`${BASE_URL}/blocks/${blockId}`, {
       block: newCodeBlock,
     })
-    console.log(response.data)
     socketService.emit(SOCKET_EMIT_UPDATE_BLOCK, response.data)
     setEditedCode(val)
   }
   return (
     <>
-      <h1>{codeBlock?.title}</h1>
-      <div className="codeblock-page flex justify-center">
+      <Link to={'/'} className="back-to-lobby flex align-center">
+        <img className="svg-medium" src={backArrowIcon} alt="back-arrow" />{' '}
+        <span>Back to lobby</span>
+      </Link>
+      <header className="flex justify-center align-center gap-10 editor-header">
+        <div className='flex column align-center gap-5'>
+          <h1 className="codeblock-title flex justify-center">
+            {codeBlock?.title}
+          </h1>
+          <span>Mode: {mentorRef.current ? 'Read Only' : 'Editable'}</span>
+        </div>
+        {isCompleted && (
+          <div className="flex align-center justify-center gap-5 completed-codeblock">
+            <img className="svg-medium" src={smileyIcon} alt="smiley-img" />{' '}
+            <span>YOU GOT IT RIGHT!</span>
+          </div>
+        )}
+      </header>
+      <div className="codeblock-editor flex justify-center">
         <AceEditor
           placeholder="Write your case here.."
           mode="javascript"
