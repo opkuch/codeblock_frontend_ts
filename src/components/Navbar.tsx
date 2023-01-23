@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
+import appLogo from '../assets/cube.svg'
 const Navbar = () => {
   return (
-    <nav className="flex column align-center gradient-1">
-        <div className="app-logo" />
-        <h1>Codeblocks</h1>
+    <nav className="gradient-1">
+      <Link to="/" className="flex column align-center">
+          <img src={appLogo} alt="logo" className="svg-medium" />
+          <h1>Codeblocks</h1>
+      </Link>
     </nav>
   )
 }

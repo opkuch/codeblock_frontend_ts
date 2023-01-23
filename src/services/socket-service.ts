@@ -7,7 +7,8 @@ export const SOCKET_EVENT_BLOCK_UPDATED = 'block-updated'
 export const SOCKET_EVENT_ROOM_UPDATED = 'update-room-counter'
 
 
-const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030/'
+const baseUrl = import.meta.env.MODE === 'development' ? '//localhost:3030/' : ''
+
 export const socketService = createSocketService()
 
 // for debugging from console

@@ -19,23 +19,6 @@ body {
 
 }
 
-.app-logo {
-  width: 100px;
-  height: 100px;
-  background-color: $color1;
-  outline: 6px solid $color1;
-  outline-offset: -1px;
-  transform: rotate(45deg) scale(0.5);
-
-  &::before {
-    content: '';
-    display: block;
-    width: 100px;
-    height: 100px;
-    background-color: $color1;
-  }
-}
-
 h1,
 h2,
 h3,
@@ -58,15 +41,16 @@ a {
 }
 
 // MAC like scrollbar
+
 ::-webkit-scrollbar {
   width: 8px;
-  background: rgba(45, 45, 45);
+  background: rgb(223, 223, 223);
   -webkit-border-radius: 100px;
 }
 
 
 ::-webkit-scrollbar-thumb:vertical {
-  background-color: rgb(255, 255, 255);
+  background-color: $color1;
   -webkit-border-radius: 100px;
 }
 

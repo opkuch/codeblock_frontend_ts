@@ -5,8 +5,20 @@
   transform: translate(-50%, -50%);
 }
 .loader {
+  width: 100px;
+  height: 100px;
+  background-color: $color1;
+  outline: 6px solid $color1;
+  outline-offset: -1px;
+  transform: rotate(45deg) scale(0.5);
+
   &::before {
     content: '';
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: $color1;
+
     -webkit-animation: rotate 3s infinite;
     animation: rotate 3s infinite;
   }

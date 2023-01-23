@@ -1,0 +1,33 @@
+.codeblock-editor {
+    padding-block: 10px;
+  }
+  
+  .editor-wrapper {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  
+  .back-to-lobby {
+    width: fit-content;
+    position: absolute;
+    span {
+      width: 200px;
+    }
+    @media(max-width: 650px) {
+      position: static;
+    }
+  }
+  
+  .editor-header {
+    padding-block: 1rem;
+    @media(max-width: 400px) {
+      flex-direction: column;
+    }
+  }
+  
+  .completed-codeblock {
+    background-color: lightgreen;
+    border-radius: 2px;
+  }

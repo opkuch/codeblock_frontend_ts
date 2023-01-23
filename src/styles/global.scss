@@ -1,15 +1,17 @@
 // Externals
-@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Lato&family=Lexend+Deca:wght@300&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@700&family=Roboto&family=Satisfy&family=Staatliches&family=Sue+Ellen+Francisco&family=Thasadith:wght@700&family=Varela+Round&display=swap&family=Actor&display=swap&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-// Basics
+// Partial SCSS files
+
+// general css properties and helpers
 @import 'basics/variables';
-@import 'basics/typography';
 @import 'basics/base';
 @import 'basics/helpers';
 @import 'basics/layout';
 @import 'basics/animations';
 
-// Cmps
+// specific css properties
 @import 'cmps/codeblocks';
 @import 'cmps/loader';
 @import 'cmps/navbar';
+@import 'cmps/editor';

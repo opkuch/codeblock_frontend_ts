@@ -5,6 +5,7 @@
     background: $color2;
     color: whitesmoke;
     clip-path: polygon(10% 0, 90% 0, 90% 100%, 10% 100%);
+    position: relative;
     cursor: pointer;
     align-items: center;
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.15);
@@ -24,46 +25,18 @@
 
     }
     .small-title {
+      position: absolute;
+      left: 22%;
       outline: 2px solid $color3;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 50px;
       width: 50px;
+
+      @media(max-width: 450px) {
+        display: none;
+      }
     }
 
-}
-
-.codeblock-editor {
-  padding-block: 10px;
-}
-
-.editor-wrapper {
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-}
-
-.back-to-lobby {
-  width: fit-content;
-  position: absolute;
-  span {
-    width: 200px;
-  }
-  @media(max-width: 650px) {
-    position: static;
-  }
-}
-
-.editor-header {
-  padding-block: 1rem;
-  @media(max-width: 400px) {
-    flex-direction: column;
-  }
-}
-
-.completed-codeblock {
-  background-color: lightgreen;
-  border-radius: 2px;
 }

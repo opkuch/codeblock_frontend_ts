@@ -1,9 +1,7 @@
 
-export const utilService = {
-    debounce
-}
+export const editorThemes = ["github", "dracula", "groovebox", "plastic"]
 
-  function debounce(func: Function, wait = 500) {
+  export function debounce(func: Function, wait = 500) {
     let timeout: any
   
     return function executedFunction(...args: any) {
