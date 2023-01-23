@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, ReactHTMLElement } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { BASE_URL } from '../config'
 import { useParams } from 'react-router-dom'
 import {
@@ -16,7 +16,6 @@ import 'ace-builds/src-noconflict/ext-language_tools'
 import 'ace-builds/src-noconflict/mode-javascript'
 import axios from 'axios'
 import { CodeBlock } from '../types'
-import Navbar from '../components/Navbar'
 import CompletedBlock from '../components/CompletedBlock'
 import BackToLobby from '../components/BackToLobby'
 
@@ -28,10 +27,7 @@ const CodeBlockPage = () => {
   const [codeBlock, setCodeBlock] = useState<CodeBlock>()
   const [isCompleted, setIsCompleted] = useState(false)
   // Wrapping editor onchange function with debouce to avoid exccesive API calls
-  const delayedQuery = debounce(
-    (val: string) => handleChange(val),
-    1000
-  )
+  const delayedQuery = debounce((val: string) => handleChange(val), 1000)
 
   useEffect(() => {
     // Fetching current codeblock using id parameter from router and assign it to a useState variable
@@ -103,39 +99,36 @@ const CodeBlockPage = () => {
   }
 
   return (
-    <>
-      <Navbar />
-      <div className="main-layout">
-        <BackToLobby />
-        <div className="editor-wrapper">
-          <header className="flex space-around align-center gap-10 editor-header">
-            <div className="flex column align-center">
-              <h1 className="codeblock-title flex justify-center text-capitalize">
-                {codeBlock?.title}
-              </h1>
-              <span>Mode: {modeRef.current ? 'Read Only' : 'Editable'}</span>
-            </div>
-            <CompletedBlock isCompleted={isCompleted}/>
-          </header>
-          <section className="codeblock-editor flex justify-center">
-            <AceEditor
-              placeholder="Write your case here.."
-              mode="javascript"
-              theme='gruvbox'
-              fontSize={14}
-              showPrintMargin={true}
-              showGutter={true}
-              highlightActiveLine={true}
-              value={codeBlock?.code || ''}
-              onChange={(val) => delayedQuery(val)}
-              readOnly={modeRef.current}
-              setOptions={{ useWorker: false }}
-            />
-          </section>
-        </div>
-        <div className="gradient-02" />
+    <div className="main-layout">
+      <BackToLobby />
+      <div className="editor-wrapper">
+        <header className="flex space-around align-center gap-10 editor-header">
+          <div className="flex column align-center">
+            <h1 className="codeblock-title flex justify-center text-capitalize">
+              {codeBlock?.title}
+            </h1>
+            <span>Mode: {modeRef.current ? 'Read Only' : 'Editable'}</span>
+          </div>
+          <CompletedBlock isCompleted={isCompleted} />
+        </header>
+        <section className="codeblock-editor flex justify-center">
+          <AceEditor
+            placeholder="Write your case here.."
+            mode="javascript"
+            theme="gruvbox"
+            fontSize={14}
+            showPrintMargin={true}
+            showGutter={true}
+            highlightActiveLine={true}
+            value={codeBlock?.code || ''}
+            onChange={(val) => delayedQuery(val)}
+            readOnly={modeRef.current}
+            setOptions={{ useWorker: false }}
+          />
+        </section>
       </div>
-    </>
+      <div className="gradient-02" />
+    </div>
   )
 }
 

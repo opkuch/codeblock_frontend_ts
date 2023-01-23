@@ -29,7 +29,7 @@ const useFetchData = (dataUrl: string) => {
         fetchData(dataUrl)
         
         return () => {
-            console.log('cleaning up')
+            // Cleaning up
             isMounted = false
             source.cancel()
         }

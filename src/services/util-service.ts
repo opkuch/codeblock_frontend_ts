@@ -1,6 +1,4 @@
 
-export const editorThemes = ["github", "dracula", "groovebox", "plastic"]
-
   export function debounce(func: Function, wait = 500) {
     let timeout: any
   
