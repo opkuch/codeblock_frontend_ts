@@ -23,12 +23,12 @@ import Loader from '../components/Loader'
 const CodeBlockPage = () => {
   const { blockId } = useParams()
   // Store our user mode inside a ref
-  const modeRef = useRef<boolean | undefined>()
+  const isMentorRef = useRef<boolean | undefined>()
   // State to store the updating codeblock
   const [codeBlock, setCodeBlock] = useState<CodeBlock>()
   const [isCompleted, setIsCompleted] = useState(false)
   // Wrapping editor onchange function with debouce to avoid exccesive API calls
-  const delayedQuery = debounce((val: string) => handleChange(val), 1000)
+  const delayedQuery = debounce((val: string) => handleChange(val), 1100)
 
   useEffect(() => {
     // Fetching current codeblock using id parameter from router and assign it to a useState variable
@@ -51,9 +51,9 @@ const CodeBlockPage = () => {
     socketService.emit(SOCKET_EMIT_USER_CONNECTED, blockId)
     // Decide user mode based on current online users
     socketService.on(SOCKET_EVENT_ROOM_UPDATED, (onlineUsersCount: number) => {
-      if (modeRef.current) return
-      if (onlineUsersCount === 1) modeRef.current = true
-      else modeRef.current = false
+      if (isMentorRef.current) return
+      if (onlineUsersCount === 1) isMentorRef.current = true
+      else isMentorRef.current = false
     })
     socketService.on(SOCKET_EVENT_BLOCK_UPDATED, updateBlockFromSocket)
     return () => {
@@ -86,21 +86,25 @@ const CodeBlockPage = () => {
 
   const handleChange = async (val: string) => {
     // Read-only mode cannot edit text, but making extra sure they can't change our data
-    if (modeRef.current) return
+    if (isMentorRef.current) return
     // Breaking pointer
     const newCodeBlock = JSON.parse(JSON.stringify(codeBlock))
     // Attaching most recent code
     newCodeBlock.code = val
-    // Sending the request for the backend to make the change with the updated codeblock via axios
-    const response = await axios.put(`${BASE_URL}/blocks/${blockId}`, {
-      block: newCodeBlock,
-    })
-    // Broadcasting to all other sockets with the updated codeblock after request is done
-    socketService.emit(SOCKET_EMIT_UPDATE_BLOCK, response.data)
+    try {
+      // Sending the request for the backend to make the change with the updated codeblock via axios
+      const response = await axios.put(`${BASE_URL}/blocks/${blockId}`, {
+        block: newCodeBlock,
+      })
+      // Broadcasting to all other sockets with the updated codeblock after request is done
+      socketService.emit(SOCKET_EMIT_UPDATE_BLOCK, response.data)
+    } catch (err) {
+      console.log(err, 'cannot update block')
+    }
   }
 
   if (!codeBlock) return <Loader />
-  
+
   return (
     <div className="main-layout">
       <BackToLobby />
@@ -110,7 +114,7 @@ const CodeBlockPage = () => {
             <h1 className="codeblock-title flex justify-center text-capitalize">
               {codeBlock?.title}
             </h1>
-            <span>Mode: {modeRef.current ? 'Read Only' : 'Editable'}</span>
+            <span>Mode: {isMentorRef.current ? 'Read Only' : 'Editable'}</span>
           </div>
           <CompletedBlock isCompleted={isCompleted} />
         </header>
@@ -125,7 +129,7 @@ const CodeBlockPage = () => {
             highlightActiveLine={true}
             value={codeBlock?.code || ''}
             onChange={(val) => delayedQuery(val)}
-            readOnly={modeRef.current}
+            readOnly={isMentorRef.current}
             setOptions={{ useWorker: false }}
           />
         </section>

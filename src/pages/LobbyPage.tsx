@@ -10,25 +10,25 @@ const LobbyPage = () => {
   const { data, isLoading, isError } = useFetchData(BASE_URL + '/blocks')
 
   return (
-      <div className="main-layout">
-        {isLoading ? (
-          <Loader />
-        ) : isError ? (
-          <div className="error">
-            Something is not working properly right now..
-          </div>
-        ) : (
-          <section className="simple-cards-grid">
-            {data.map((codeblock: CodeBlock, idx: number) => (
-              <MiniCodeBlock
-                key={codeblock._id}
-                codeBlock={codeblock}
-                idx={idx}
-              />
-            ))}
-          </section>
-        )}
-      </div>
+    <div className="main-layout">
+      {isLoading ? (
+        <Loader />
+      ) : isError ? (
+        <div className="error">
+          Something is not working properly right now..
+        </div>
+      ) : (
+        <section className="simple-cards-grid">
+          {data.map((codeblock: CodeBlock, idx: number) => (
+            <MiniCodeBlock
+              key={codeblock._id}
+              codeBlock={codeblock}
+              idx={idx}
+            />
+          ))}
+        </section>
+      )}
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 .codeblock-editor {
-    padding-block: 10px;
+    padding-block-end: 10px;
   }
   
   .editor-wrapper {
@@ -10,13 +10,35 @@
   }
   
   .back-to-lobby {
-    width: fit-content;
-    position: absolute;
-    span {
-      width: 200px;
+    width: 45px;
+    height: 45px;
+    position: relative;
+    background-color: $color1;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all .3s ease;
+    color: whitesmoke;
+
+    img {
+      filter: invert(100%) sepia(97%) saturate(2%) hue-rotate(34deg) brightness(109%) contrast(100%);
     }
-    @media(max-width: 650px) {
-      position: static;
+
+    &:hover {
+      width: 160px;
+
+      span {
+        transform: translate(45px);
+      }
+    }
+    
+    span {
+      position: absolute;
+      transition: transform .3s ease;
+      transform: translate(180px);
+    }
+
+    @media(max-width: 700px) {
+      display: none;
     }
   }
   
