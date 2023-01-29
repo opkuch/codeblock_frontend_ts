@@ -42,19 +42,12 @@ const CodeBlockPage = () => {
       }
     }
     fetchCodeBlock()
-  }, [])
-
-  useEffect(() => {
-    // Setting socket topic to current room
-    socketService.emit(SOCKET_EMIT_SET_TOPIC, blockId)
-    // Triggering an event on backend to count online user on current topic
-    socketService.emit(SOCKET_EMIT_USER_CONNECTED, blockId)
-    // Decide user mode based on current online users
     socketService.on(SOCKET_EVENT_ROOM_UPDATED, (onlineUsersCount: number) => {
       if (isMentorRef.current) return
       if (onlineUsersCount === 1) isMentorRef.current = true
       else isMentorRef.current = false
     })
+    
     socketService.on(SOCKET_EVENT_BLOCK_UPDATED, updateBlockFromSocket)
     return () => {
       // Component unmounting
@@ -64,7 +57,16 @@ const CodeBlockPage = () => {
       // Clear socket room
       socketService.emit(SOCKET_EMIT_SET_TOPIC, '')
     }
-  }, [codeBlock])
+
+  }, [])
+
+  useEffect(() => {
+    // Setting socket topic to current room
+    socketService.emit(SOCKET_EMIT_SET_TOPIC, blockId)
+    // Triggering an event on backend to count online user on current topic
+    socketService.emit(SOCKET_EMIT_USER_CONNECTED, blockId)
+
+  }, [blockId])
 
   function updateBlockFromSocket(block: CodeBlock) {
     // Storing the updated codeblock in our state
